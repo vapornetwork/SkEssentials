@@ -1,3 +1,26 @@
-## SkEssentials Informations 
+### SkEssentials Informations 
+### github.com/vaporsoftwares/skessentials
 
-am lazy, ill finish later :3
+commands:
+  gmc: change player gamemode to survival
+  gms: change player gamemode to creative
+  gma: change player gamemode to adventure
+  gmsp: change player gamemode to spectator
+  god: enable/disable immunity to damage (even void damage)
+  mute: mute player
+  unmute: unmute player
+  check: check player mute/ban/uuid/ip
+  ban: ban a player
+  skessentials: main command
+  # WIP Commands
+  unban: unban a player >> i'm lazy to make it rn so yeah
+  blacklist: blacklist a player 
+  unblacklist: unblacklist a player
+  ipban: ipban a player
+  unbanip: unban an ipv4 
+  top: teleport player to the highest block
+  vanish: vanish in game
+  fly: enable/disable fly for a player
+  # WIP features 
+  silent: silent a ban, mute or blacklist (/<command> iMPDevMC You are trash :L -s)
+  staffmode: a nice little staff mode
