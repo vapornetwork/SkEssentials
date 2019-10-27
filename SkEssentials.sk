@@ -1,1 +1,277 @@
-# Void, pure void :L
+#! I'm sorry, i know options are a pain but i did it because: idk
+#! I recommend using SkQuery, Skrayfall and json.sk | All latest versions
+#! Please note that this skript has not been 100% tested in game. Please report bugs on our discord.
+#! Dont mind this thing below;
+#! config-version: 0.1
+
+variables:
+	{skess.god.%player%}    = "false"
+	{skess.mute.%player%}   = "false"
+
+options:
+	# Main 
+	a: &c&lSERVER &8»
+	b: &7You do not have permission to execute this command !
+	c: SkEssentials.sk
+
+	# Gamemodes
+	d: &fYour gamemode has been updated to &7&oCreative
+	e: &fYour gamemode has been updated to &7&oSurvival
+	f: &fYour gamemode has been updated to &7&oAdventure
+	g: &fYour gamemode has been updated to &7&oSpectator
+
+	h: &c%arg 1%'s &fgamemode has been updated to &7&oCreative
+	i: &c%arg 1%'s &fgamemode has been updated to &7&oSurvival
+	j: &c%arg 1%'s &fgamemode has been updated to &7&oAdventure
+	k: &c%arg 1%'s &fgamemode has been updated to &7&oSpectator
+
+	l: &cPlayer not found !
+
+	m: &fGod mode has been &aenabled 
+	n: &fGod mode has been &cdisabled
+
+	o: &c%arg 1%'s &fGod mode has been &aenabled
+	p: &c%arg 1%'s &fGod mode has been &cdisabled
+
+	# Please adjust settings here, if you use a prefix with a space in it, please leave
+	# the %colored sender's prefix%%player% like this. Else, add a space between 
+	# colored sender's prefix and player. 
+	# Please note that %colored player's prefix% only works if you have a 
+	# permission plugin installed, e.g: LuckPerms, PermissionsEx etc.
+
+	q: &c%arg 1% &fhas been muted by %colored sender's prefix%%sender%
+	r: &c%arg 1% &fhas been unmuted by %colored sender's prefix%%sender%
+	s: &c%arg 1% &fhas been banned by %colored sender's prefix%%sender% for the reason %arg 2%
+	t: &c%arg 1% &fhas been unbanned by %colored sender's prefix%%sender%
+
+	u: &fYou muted &c%arg 1% &ffor the reason &c%arg 2%
+	v: &fThat player is already muted !
+	w: &fThat player is not muted !
+	
+	x: &fYou unmuted &c%arg 1%
+
+	y: &c&lUUID  &8»
+	z: &c&lIPv4  &8»
+	aa: &c&lIGN    &8»
+	ab: &c&lMuted  &8»
+	ac: &c&lBanned &8»
+
+	ad: &c&lSERVER NETWORK
+	ae: &fYou banned player &c%arg 1% &ffor the reason &c%arg 2%
+
+	af: &cYou have been banned from this server !
+	ag: &fStaff &8» &e%sender%
+	ah: &fReason &8» &e%arg 2%
+
+	0: skessentials.essentials
+	1: skessentials.gamemode.creative
+	2: skessentials.gamemode.creative
+	3:
+
+command /skessentials [<text>]:
+	aliases: /skess, skessential
+	permission: 
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "&6&lSkEssentials &8» &7By &9iMPDevMC"
+			send "&8» &7/skessentials <reload>"
+
+		if arg 1 is set:
+			if player has permission "skript.*" or "skript.admin":
+				make player execute "sk reload {@c}"
+
+		if arg 1 is set:
+			if player doesn't have permission "skript.*" or "skript.admin":
+				send "{@a} {@b}"
+
+
+command /gmc [<offline player>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "{@a} {@d}"
+			set player's gamemode to creative
+
+		if arg 1 is not set:
+			if arg 1 is not online:
+				send "{@a} {@l}"
+
+		if arg 1 is set:
+			if arg 1 is online:
+				send "{@a} {@h}" to sender 
+				send "{@a} {@d}" to arg 1
+				set arg 1 gamemode to creative
+
+command /gms [<offline player>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "{@a} {@e}"
+			set player's gamemode to survival
+
+		if arg 1 is set:
+			if arg 1 is not online:
+				send "{@a} {@l}"
+
+		if arg 1 is set:
+			if arg 1 is online:
+				send "{@a} {@i}" to sender 
+				send "{@a} {@e}" to arg 1
+				set player's gamemode to survival
+
+command /gma [<offline player>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "{a} {@f}"
+			set player's gamemode to adventure
+
+		if arg 1 is set:
+			if arg 1 is not online:
+				send "{@a} {@l}"
+
+		if arg 1 is set:
+			if arg 1 is online:
+				send "{@a} {@j}" to sender 
+				send "" to arg 1
+				set arg 1 gamemode to adventure
+
+command /gmsp [<offline player>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "{@a} {@g}"
+			set player's gamemode to spectator
+
+		if arg 1 is set:
+			if arg 1 is not online:
+				send "{@a} {@l}"
+
+		if arg 1 is set:
+			if arg 1 is online:
+				send "{@a} {@k}" to sender 
+				send "{@a} {@l}" to arg 1
+
+command /god [<offline player>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			if {skess.god.%player%} is "false":
+				send "{@a} {@m}"
+				set {skess.god.%player%} to "true"
+
+		if arg 1 is not set:
+			if {skess.god.%player%} is "true":
+			send "{@a} {@n}"
+			set {skess.god.%player%} to "false"
+
+		if arg 1 is set:
+			if arg 1 is not online:
+				send "{@a} {@l}"
+
+		if arg 1 is set:
+			if arg 1 is online:
+				if {skess.god.%arg 1%} is "false":
+				send "{@a} {@o}" to sender
+				send "{@a} {@m}" to arg 1
+				set {skess.god.%arg 1%} to "true"
+
+		if arg 1 is set:
+			if arg 1 is online:
+				if {skess.god.%arg 1%} is "true":
+					send "{@a} {@p}" to sender
+					send "{@a} {@n}" to arg 1
+					set {skess.god.%arg 1%} to "false"
+
+command /mute [<offline player>] [<text>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "{@a} &fInvalid Syntax"
+			send "{@a} &cUsage: /mute <player> <reason>"
+
+		if arg 1 is set:
+			if arg 2 is not set:
+				send "{@a} &fInvalid Syntax"
+				send "{@a} &cUsage: /mute <player> <reason>"
+
+		if arg 1 is set:
+			if arg 2 is set:
+				if {skess.mute.%arg 1%} is "false":
+					send "{@a} {@u}"
+					broadcast "{@a} {@q}"
+					set {skess.mute.%arg 1%} to "true"
+
+		if arg 1 is set:
+			if arg 2 is set:
+				if {skess.mute.%arg 1%} is "true":
+					send "{@a} {@v}"
+
+
+command /unmute [<offline player>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "{@a} &fInvalid Syntax"
+			send "{@a} &cUsage: /unmute <player>"
+
+		if arg 1 is set:
+			if {skess.mute.%arg 1%} is "false":
+				send "{@a} {@w}"
+
+		if arg 1 is set:
+			if {skess.mute.%arg 1%} is "true":
+				send "{@a} {@x}"
+				broadcast "{@a} {@r}"
+				set {skess.mute.%arg 1%} to "false":
+
+command /check [<offline player>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "{@a} &fInvalid Syntax"
+			send "{@a} &cUsage: /check <player>"
+
+		if arg 1 is set:
+			set {_uuid} to arg 1 uuid
+			set {_ipv4} to arg 1 ip
+			set {_ign} to arg 1 username  
+
+			send "{@a} &f%arg 1%'s informations"
+
+			send "{@y} &f%arg 1 uuid%"
+			send "{@z} &f%{_ipv4}%"
+			send "{@aa} &f%{_ign}%"
+			send "{@ab} &f%{skess.mute.%arg 1%}%"
+			send "{@ac} &f%{skess.ban.%arg 1%}%"
+
+command /ban [<offline player>] [<text>]:
+	permission:
+	permission message: {@a} {@b}
+	trigger:
+		if arg 1 is not set:
+			send "{@a} &fInvalid Syntax"
+			send "{@a} &cUsage /ban <player> <reason>"
+			send "{@a} &fPS: Ban a player without a reason with /quickban <player>"
+
+		if arg 1 is set:
+			if arg 2 is not set:
+				send "{@a} &fInvalid Syntax"
+				send "{@a} &cUsage: /ban <player> <reason>"
+				send "{@a} &fPS: Ban a player without a reason with /quickban <player>"
+
+		if arg 1 is set:
+			if arg 2 is set:
+				send "{@a} {@ae}"
+				broadcast "{@a} {@s}"
+				ban arg 1 due to "{@ad} %nl% {@af}"
+
